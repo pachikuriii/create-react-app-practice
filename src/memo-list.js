@@ -22,10 +22,14 @@ class MemoList extends React.Component {
     }
   
     render() {
-        return (
-            <ul>
+      return (
+        <div>
+           <ul>
                <Memo/>
-            </ul>
+          </ul>
+          <button onClick={() => this.props.addMemo()}>+</button>
+          </div>
+           
         );
     }
   }
