@@ -4,7 +4,7 @@ class MemoForm extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
-        value: 'Please write an essay about your favorite DOM element.'
+        value: 'memoooo'
       };
   
       this.handleChange = this.handleChange.bind(this);
@@ -15,8 +15,8 @@ class MemoForm extends React.Component {
       this.setState({value: event.target.value});
     }
   
-    handleSubmit(event) {
-      alert('An essay was submitted: ' + this.state.value);
+  handleSubmit(event) {
+      this.props.addMemo(this.state.value)
       event.preventDefault();
     }
   

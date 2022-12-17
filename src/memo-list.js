@@ -21,11 +21,20 @@ class MemoList extends React.Component {
       event.preventDefault();
     }
   
-    render() {
+  render() {
+    const rows = []
+    this.props.memos.forEach((memo) => {
+      rows.push(
+        <Memo
+          memo={memo}
+          key={memo.id}
+        />
+        )
+      })
       return (
         <div>
            <ul>
-               <Memo/>
+               {rows}
           </ul>
           <button onClick={() => this.props.addMemo()}>+</button>
           </div>
