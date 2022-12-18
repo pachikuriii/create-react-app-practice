@@ -28,6 +28,7 @@ class MemoList extends React.Component {
         <Memo
           memo={memo}
           key={memo.id}
+          editMemo={this.props.editMemo}
         />
         )
       })

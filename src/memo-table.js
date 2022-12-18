@@ -18,7 +18,8 @@ class MemoTable extends React.Component {
       super(props);
       this.state = {
         formMode: 'off',
-        memos: todoStorage.fetch()
+        memos: todoStorage.fetch(),
+        selectedMemo: ''
       };
   
       this.handleChange = this.handleChange.bind(this);
@@ -35,19 +36,25 @@ class MemoTable extends React.Component {
     }
     addMemo = () => {
       this.setState({ formMode: '' })
-      this.state.memos.push({ id: new Date().getTime(), content:'' })
+      const newMemo = { id: new Date().getTime(), content:'new memo' }
+      this.state.memos.push(newMemo)
       todoStorage.save(this.state.memos)
-      this.setState({ todos: this.state.memos })
-    }
+      this.setState({ selectedMemo: newMemo, memos: this.state.memos })
+  }
   
-    render() {
+  editMemo = (memo) => {
+    this.setState({ formMode: '', selectedMemo: memo })
+  }
+  
+  render() {
+
         return (
           <div className="memo-table">
             <div>
-              <MemoList addMemo={this.addMemo} memos={this.state.memos} />
+              <MemoList addMemo={this.addMemo} editMemo={this.editMemo}  memos={this.state.memos} />
             </div>
             <div className={this.state.formMode}>
-              <MemoForm />
+              <MemoForm selectedMemo={this.state.selectedMemo} />
             </div>   
           </div>
       );

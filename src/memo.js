@@ -3,8 +3,8 @@ import React from "react";
 class Memo extends React.Component {
     constructor(props) {
       super(props);
-      this.state = {
-        value: 'Please write an essay about your favorite DOM element.'
+        this.state = {
+        content: this.props.memo.content
       };
   
       this.handleChange = this.handleChange.bind(this);
@@ -20,9 +20,10 @@ class Memo extends React.Component {
       event.preventDefault();
     }
   
+  
     render() {
         return (
-           <p>メモ</p>
+            <p onClick={() => this.props.editMemo(this.props.memo)}>{this.props.memo.content}</p>
         );
     }
   }
