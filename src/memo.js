@@ -3,7 +3,8 @@ import React from "react";
 class Memo extends React.Component {
     constructor(props) {
       super(props);
-        this.state = {
+      this.state = {
+        memo: this.props.memo,
         content: this.props.memo.content
       };
   
@@ -12,7 +13,8 @@ class Memo extends React.Component {
     }
   
     handleChange(event) {
-      this.setState({value: event.target.value});
+      this.setState({ value: event.target.value });
+      
     }
   
     handleSubmit(event) {
@@ -23,7 +25,7 @@ class Memo extends React.Component {
   
     render() {
         return (
-            <p onClick={() => this.props.editMemo(this.props.memo)}>{this.props.memo.content}</p>
+            <p onClick={() => this.props.editMemo(this.state.memo)}>{this.state.memo.content}</p>
         );
     }
   }
