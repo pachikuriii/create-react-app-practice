@@ -1,8 +1,8 @@
-import './App.css';
+import './App.css'
 import './memo-form'
-import MemoTable from './memo-table';
+import MemoTable from './memo-table'
 
-function App() {
+function App () {
   return (
     <div className="App">
       <h1>
@@ -12,7 +12,7 @@ function App() {
         <MemoTable/>
       </div>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App

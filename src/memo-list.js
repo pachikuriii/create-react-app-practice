@@ -1,8 +1,8 @@
-import React from "react";
+import React from 'react'
 import Memo from './memo'
 
 class MemoList extends React.Component {
-  render() {
+  render () {
     const rows = []
     this.props.memos.forEach((memo) => {
       rows.push(
@@ -11,19 +11,19 @@ class MemoList extends React.Component {
           key={memo.id}
           edit={this.props.edit}
         />
-        )
+      )
     })
-    
-      return (
+
+    return (
         <div>
            <ul>
                {rows}
           </ul>
           <button onClick={() => this.props.add()}>+</button>
           </div>
-           
-        );
-    }
+
+    )
   }
-  
-  export default MemoList;
+}
+
+export default MemoList
