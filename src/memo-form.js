@@ -4,10 +4,9 @@ class MemoForm extends React.Component {
   constructor(props) {
     super(props);
       this.state = {
-        content: ''
+        content: '',
       };
-    this.handleChange = this.handleChange.bind(this);
-
+      this.handleChange = this.handleChange.bind(this);
     }
   
   handleChange(event) {
@@ -34,7 +33,6 @@ class MemoForm extends React.Component {
       );
     }
   }
-  
   
   export default MemoForm;
   

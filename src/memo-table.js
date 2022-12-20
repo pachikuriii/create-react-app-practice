@@ -49,6 +49,17 @@ class MemoTable extends React.Component {
       formDisplayMode: 'off',
     }))
   }
+
+  delete = (selectedMemo) => {
+    const memo = this.state.memos.find((memo) => memo.id === selectedMemo.id)
+    const index = this.state.memos.indexOf(memo)
+    const result = window.confirm('本当に削除しますか？')
+    if (result) {
+      this.state.memos.splice(index, 1)
+    }
+    todoStorage.save(this.state.memos)
+    this.setState({ memos: this.state.memos })
+  }
   
   render() {
         return (
@@ -63,7 +74,6 @@ class MemoTable extends React.Component {
       );
     }
   }
-  
   
   export default MemoTable;
   
