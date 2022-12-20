@@ -17,60 +17,47 @@ class MemoTable extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
-        formMode: 'off',
+        formDisplayMode: 'off',
         memos: todoStorage.fetch(),
-        selectedMemo: {}
+        selectedMemo: '',
       };
-  
-      this.handleChange = this.handleChange.bind(this);
-      this.handleSubmit = this.handleSubmit.bind(this);
     }
-  
-    handleChange(event) {
-      this.setState({value: event.target.value});
-    }
-  
-    handleSubmit(event) {
-      alert('An essay was submitted: ' + this.state.value);
-      event.preventDefault();
-    }
-    addMemo = () => {
-      this.setState({ formMode: '' })
+
+  add = () => {
+      this.setState({ formDisplayMode: '' })
       const newMemo = { id: new Date().getTime(), content:'new memo' }
       this.state.memos.push(newMemo)
       todoStorage.save(this.state.memos)
       this.setState({ selectedMemo: newMemo, memos: this.state.memos })
   }
   
-  editMemo = (memo) => {
-    this.setState({ selectedMemo: memo })
-    this.switchForm()
+  edit = (memo) => {
+    this.setState({
+      selectedMemo: memo,
+      formDisplayMode: ''
+    });
   }
 
-  editedMemo = (editedMemo, newContent) => {
+  doneEdit = (editedMemo, newContent) => {
     const memo = this.state.memos.find((memo) => memo.id === editedMemo.id)
     const index = this.state.memos.indexOf(memo)
     let oldMemos = this.state.memos
     oldMemos[index].content = newContent
     todoStorage.save(oldMemos)
-    this.setState(state => ({
-      memos: state.memos,
-      formMode: 'off'
+    this.setState(() => ({
+      memos: this.state.memos,
+      formDisplayMode: 'off',
     }))
-  }
-
-  switchForm = () => {
-    this.setState({ formMode: '' })
   }
   
   render() {
         return (
           <div className="memo-table">
             <div>
-              <MemoList addMemo={this.addMemo} editMemo={this.editMemo}  memos={this.state.memos} />
+              <MemoList add={this.add} edit={this.edit}  memos={this.state.memos} />
             </div>
-            <div className={this.state.formMode}>
-              <MemoForm selectedMemo={this.state.selectedMemo} editedMemo={this.editedMemo} />
+            <div className={this.state.formDisplayMode}>
+              <MemoForm selectedMemo={this.state.selectedMemo} doneEdit={this.doneEdit}  delete={this.delete} />
             </div>   
           </div>
       );
