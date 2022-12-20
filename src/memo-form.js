@@ -1,37 +1,44 @@
-import React from 'react'
+/* eslint-disable react/prop-types */
+import React from "react";
 
 class MemoForm extends React.Component {
-  constructor (props) {
-    super(props)
+  constructor(props) {
+    super(props);
     this.state = {
-      content: ''
-    }
-    this.handleChange = this.handleChange.bind(this)
+      content: "",
+    };
+    this.handleChange = this.handleChange.bind(this);
   }
 
-  handleChange (event) {
-    this.setState({ content: event.target.value })
+  handleChange(event) {
+    this.setState({ content: event.target.value });
   }
 
-  doneEdit = () => {
-    this.props.doneEdit(this.props.selectedMemo, this.state.content)
-    this.setState({ content: '' })
-  }
+  doneEdit = (event) => {
+    this.props.doneEdit(this.props.selectedMemo, this.state.content);
+    event.preventDefault();
+  };
 
   delete = () => {
-    this.props.delete(this.props.selectedMemo)
-    this.setState({ content: '' })
-  }
+    this.props.delete(this.props.selectedMemo);
+  };
 
-  render () {
+  render() {
     return (
       <div>
-        <textarea type="text" value={this.state.content} onChange={this.handleChange} />
-        <button onClick={() => this.doneEdit()}>変更</button>
-        <button onClick={() => this.delete()}>削除</button>
-        </div>
-    )
+        <form onSubmit={this.doneEdit}>
+          <textarea
+            type="text"
+            key={this.props.selectedMemo.id}
+            defaultValue={this.props.selectedMemo.content}
+            onChange={this.handleChange}
+          />
+          <input type="submit" value="変更" />
+          <input type="button" onClick={() => this.delete()} value="削除" />
+        </form>
+      </div>
+    );
   }
 }
 
-export default MemoForm
+export default MemoForm;

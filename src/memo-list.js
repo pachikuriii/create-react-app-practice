@@ -1,29 +1,22 @@
-import React from 'react'
-import Memo from './memo'
+/* eslint-disable react/prop-types */
+
+import React from "react";
+import Memo from "./memo";
 
 class MemoList extends React.Component {
-  render () {
-    const rows = []
+  render() {
+    const rows = [];
     this.props.memos.forEach((memo) => {
-      rows.push(
-        <Memo
-          memo={memo}
-          key={memo.id}
-          edit={this.props.edit}
-        />
-      )
-    })
+      rows.push(<Memo memo={memo} key={memo.id} edit={this.props.edit} />);
+    });
 
     return (
-        <div>
-           <ul>
-               {rows}
-          </ul>
-          <button onClick={() => this.props.add()}>+</button>
-          </div>
-
-    )
+      <div>
+        <ul>{rows}</ul>
+        <button onClick={() => this.props.add()}>+</button>
+      </div>
+    );
   }
 }
 
-export default MemoList
+export default MemoList;
