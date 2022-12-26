@@ -5,7 +5,7 @@ class MemoForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      content: "",
+      content: this.props.selectedMemo.content,
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -27,12 +27,7 @@ class MemoForm extends React.Component {
     return (
       <div>
         <form onSubmit={this.doneEdit}>
-          <textarea
-            type="text"
-            key={this.props.selectedMemo.id}
-            defaultValue={this.props.selectedMemo.content}
-            onChange={this.handleChange}
-          />
+          <textarea value={this.state.content} onChange={this.handleChange} />
           <input type="submit" value="変更" />
           <input type="button" onClick={() => this.delete()} value="削除" />
         </form>

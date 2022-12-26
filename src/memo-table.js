@@ -74,6 +74,7 @@ class MemoTable extends React.Component {
         </div>
         <div className={this.state.formDisplayMode}>
           <MemoForm
+            key={this.state.selectedMemo.id}
             selectedMemo={this.state.selectedMemo}
             doneEdit={this.doneEdit}
             delete={this.delete}
